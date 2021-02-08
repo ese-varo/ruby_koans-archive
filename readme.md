@@ -27,3 +27,32 @@
 - eval method
 #### constants
 - explicit scoping
+#### open classes
+- why does it uses `::`? (scope operator)
+```
+  class ::Integer
+    def even?
+      (self % 2) == 0
+    end
+  end
+```
+
+#### passing messages
+- underscores: 
+```
+  def test_send_with_underscores_will_also_send_messages
+    mc = MessageCatcher.new
+
+    assert_equal true, mc.__send__(:caught?)
+
+    # THINK ABOUT IT:
+    #
+    # Why does Ruby provide both send and __send__ ?
+  end
+
+```
+Both obj.msg and obj.send(:msg) sends the message named :msg to
+the object. We use "send" when the name of the message can vary
+dynamically (e.g. calculated at run time), but by far the most
+common way of sending a message is just to say: obj.msg.
+
