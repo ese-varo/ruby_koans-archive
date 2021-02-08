@@ -15,6 +15,16 @@
 #
 def triangle(a, b, c)
   # WRITE THIS CODE
+  sides = [a,b,c].sort
+  if sides.uniq.min <= 0
+    raise TriangleError.new, 'Sides cannot be 0 or less'
+  end
+  if sides.min(2).reduce(:+) <= sides.max
+    raise TriangleError.new 'One side >= than the sum of the other two'
+  end
+  return :equilateral if sides.uniq.size == 1
+  return :isosceles   if sides.uniq.size == 2
+  :scalene
 end
 
 # Error class used in part 2.  No need to change this code.
